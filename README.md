@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Frontend Mentor - QR code component
 
 ![Design preview for the QR code component coding challenge](./design/desktop-preview.jpg)
@@ -86,7 +85,3 @@ We love receiving feedback! We're always looking to improve our challenges and o
 This challenge is completely free. Please share it with anyone who will find it useful for practice.
 
 **Have fun building!** 🚀
-=======
-# qr-code-component-main
-Frontendmentor: Newbie frontend design challenge
->>>>>>> b12e43c191d45d4cec04abb70160ec644b30379e

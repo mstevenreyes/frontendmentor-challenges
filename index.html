@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Frontend Mentor | QR code component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    body { 
+      background-color: rgb(213, 225, 239);
+    }
+    .main-content {
+      height: 95vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card {
+      background-color: white;
+      height: 28rem;
+      width: 18rem;
+      text-align: center;
+      padding: .9rem .9rem 1.5rem .9rem;
+      border-radius: 1rem;
+      font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+      box-shadow: 2px 10px 29px 0px rgba(0,0,0,0.23);
+    }
+    .card img{
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      border-radius: .8rem;
+    }
+    .card .head-text {color: rgb(39, 47, 66); font-size: 1.2rem; font-weight: 700; text-align: center; margin-bottom: 1rem;}
+    .card .sub-text { color: rgb(39, 47, 66); font-size: .9rem;  font-family: 'Century Gothic', 'Arial Narrow', Arial, sans-serif; font-weight: bold; opacity: 50%; width: 90%; margin: 0 auto; }
+    .attribution { font-size: 11px; text-align: center; margin-top: auto;}
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <main class="main-content">
+    <div class="card">
+        <img src="./images/image-qr-code.png" alt="qr-code">
+        <div class="label-container">
+            <p class="head-text">Improve your front-end skills by building projects</p>
+            <p class="sub-text">Scan the QR code to visit Frontend Mentor and take your coding skills to the next level</p>
+        </div>
+    </div>
+  </main>
+  
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Steven Reyes</a>.
+  </div>
+</body>
+</html>

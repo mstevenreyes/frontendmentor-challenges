@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="./output.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -12,59 +13,118 @@
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    body {display: flex; place-content: center; align-items: center; height: 100vh;background-color: rgba(54,56,77,255); color:  rgba(54,56,77,255); font-family: 'Arial', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
-    .card {display: flex; justify-content: space-between; background-color: #ffffff; border-radius: 1rem; width: 45rem; height: max-content; padding: 2rem 2rem}
+    body {display: flex; justify-content: center ;align-items: center; height: 100vh;background-color: rgba(54,56,77,255); color:  rgba(54,56,77,255); font-family: 'Arial', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
+    .card {width: 100% ;border-radius: .8rem; background-color: #ffffff;flex-direction: column;; width: 100%; padding: 2rem 0rem; margin-bottom: 20rem;}
+    #success-card {width: 100%; height: 100%;}
+    .card section:nth-child(1){order: 2}
+    .card section:nth-child(2){order: 1}
     .card h1 { font-weight: 700; font-size: 3rem; margin-bottom: .3rem;}
-    .card p {font-size: .8rem; font-weight: 500; display: flex; align-items: center; font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;}
+    .card p {font-size: .8rem; font-weight: 500; display: flex; align-items: center; font-family: 'Poppins', 
+    'Arial Narrow', Arial, sans-serif; margin-top: 1rem;}
+    .card .info-container p:nth-child(3) { margin-top: 2rem;}
     .card p img {margin-right: .8rem;}
-    .card button { background-color: rgba(35,39,66,255); border-radius: .3rem; color: #ffffff; font-size: .8rem;}
-    .card .info-container {width: 48%;}
-    .card .email-container {display: flex; flex-direction: column;}
+    .card button {background-image: linear-gradient(to right, rgba(35,39,66,255), rgba(35,39,66,255)); border-radius: .5rem; color: #ffffff; font-size: .8rem; 
+      transition-duration: .2s;}
+    button:hover {
+      background-position: right center; /* change the direction of the change here */
+      background-image: linear-gradient(to right, #ff5474 0%, #ff6644  100%);
+      /* background-color: #c8918c; */
+    }
+    @media only screen and (min-width:768px) {
+      .card section:nth-child(1){order: 1}
+      .card .info-container {width: 48%;}
+
+      .card {flex-direction: row;  width: 49rem;  padding: 2rem 1.3rem 2rem 2.5rem; margin-bottom: 0;}
+      .card .illustration-image { width: 48%;}
+      #success-card {width: 27rem; height: 27rem;}
+    }
+    
+    
+    .card .email-container {display: flex; flex-direction: column; width: 100%;}
     .card .email-container label{font-size: .9rem; font-weight: 600;}
-    .card .email-container input{font-size: 1rem; font-weight: 400; width: 100%; margin-top: .5rem; border-radius: .3rem; border: 2px solid #d4d4d4; padding: .3rem; outline: none;}
-    .card .illustration-image { width: 48%;}
+    .card .email-container input{font-size: 1rem; font-weight: 400; margin-top: .5rem; border-radius: .5rem; border: 2px solid #d4d4d4; padding: .8rem 1.3rem; outline: none;}
+    .card .email-container input.error { border-color: #c8918c; color: #e2817c; background-color: rgba(255,232,230,255); }
     .card .illustration-image img { width: 100%; display: block;}
     .attribution { font-size: 11px; text-align: center; }
     .attribution a { color: hsl(228, 45%, 44%); }
+    .info-container button { font-size: .95rem; font-weight: 600; margin-top: 1rem; padding: 1rem 1.2rem; width: 100%; cursor: pointer;}
+    
   </style>
 </head>
 <body>
 
   <!-- Sign-up form start -->
-  <main class="card">
-    <section class="info-container">
-      <h1>
-        Stay updated!
-      </h1>
-      <p>Join 60,000+ product managers receiving monthly updates on:</p>
-      <p><img src="./assets/images/icon-list.svg" alt="check-list">Product discovery and building what matters</p>
-      <p><img src="./assets/images/icon-list.svg" alt="check-list"> to ensure updates are a success</p>
-      <p><img src="./assets/images/icon-list.svg" alt="check-list">And much more!</p>
+  <main class="w-full h-full md:h-max md:w-max">
+    <div class="card flex justify-between shadow-xl" id="email-card">
+      <section class="info-container">
+        <h1>
+          Stay updated!
+        </h1>
+        <p>Join 60,000+ product managers receiving monthly updates on:</p>
+        <p><img src="./assets/images/icon-list.svg" alt="check-list">Product discovery and building what matters</p>
+        <p><img src="./assets/images/icon-list.svg" alt="check-list"> to ensure updates are a success</p>
+        <p><img src="./assets/images/icon-list.svg" alt="check-list">And much more!</p>
+        
+        <div class="email-container">
+          <div class="w-full flex items-start mt-10">
+            <label for="email" class="email-label" style="font-size: .75rem;">Email address</label> 
+            <span class="text-sm ml-auto hidden" id="email-error" style="color: #e17e78">Valid email required</span>
+          </div>
+          <input type="email" id="email" placeholder="ash#loremcompany.com">
+        </div>
       
-      <div class="email-container">
-        <label for="email" class="email-label">Email address</label> 
-        <input type="email" id="email" placeholder="email@company.com">
-      </div>
-    
-      <button> Subscribe to monthly newsletter</button>
-    </section>
-    <section class="illustration-image">
-      <img src="./assets/images/illustration-sign-up-desktop.svg" alt="">
-    </section>
-  </main>
+        <button onclick="validateEmail()" class="tracking-wider"> Subscribe to monthly newsletter</button>
+      </section>
+      <section class="illustration-image w-full rounded-xl">
+        <img src="./assets/images/illustration-sign-up-desktop.svg" alt="">
+      </section>
+    </div>
+
   <!-- Sign-up form end -->
 
   <!-- Success message start -->
 
-  <!-- Thanks for subscribing!
-
-  A confirmation email has been sent to ash@loremcompany.com. 
-  Please open it and click the button inside to confirm your subscription.
-
-  Dismiss message -->
-
+  <div id="success-card" class="hidden justify-center items-center mx-auto bg-white px-10 py-8 md:rounded-3xl shadow-lg">
+    <div class="flex flex-col h-max">
+      <div class="w-10">
+        <img class="block w-full" src="./assets/images/icon-list.svg" alt="check-list">
+      </div>
+        <p class="text-5xl font-bold mt-8">Thanks for subscribing!</p>
+        <p class="text-sm mt-5">
+          A confirmation email has been sent to <span class="font-bold">ash@loremcompany.com. </span>
+          Please open it and click the button inside to confirm your subscription.  
+        </p>
+        <button onclick="dismissMessage()" class="w-full px-8 py-5 mt-8 tracking-wider rounded-lg text-white" style="background-color: #232742;">
+          Dismiss message
+        </button>
+    </div>
+  </div>
+  </main>
   <!-- Success message end -->
-  
+  <script>
+    validateEmail = () => {
+      let email = document.getElementById('email').value;
+      let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+      if (email.match(validRegex)) {
+        document.getElementById('email-card').classList.add('hidden');
+        document.getElementById('email-card').classList.remove('flex');
+        document.getElementById('success-card').classList.remove('hidden');
+        document.getElementById('success-card').classList.add('flex');
+        return true;
+      } else {
+        document.getElementById('email-error').classList.remove('hidden')
+        document.getElementById('email').classList.add('error')
+        return false;
+      }
+    }
+
+    dismissMessage = () => {
+      document.getElementById('email-card').classList.add('flex');
+      document.getElementById('email-card').classList.remove('hidden');
+      document.getElementById('success-card').classList.add('hidden');
+    }
+  </script>
 
 </body>
 </html>

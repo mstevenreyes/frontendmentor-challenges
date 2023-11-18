@@ -12,48 +12,142 @@
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    body { font-family: 'Poppins', sans-serif;}
+    @font-face{ font-family: 'Ubuntu'; src: url('./assets/fonts/Ubuntu-Bold.ttf'); font-weight: bold;}
+    @font-face{ font-family: 'Ubuntu'; src: url('./assets/fonts/Ubuntu-Medium.ttf'); font-weight: normal;}
+    @font-face{ font-family: 'Ubuntu'; src: url('./assets/fonts/Ubuntu-Regular.ttf'); font-weight: lighter;}
+    body { font-family: 'Ubuntu', sans-serif;}
     input[type='text'] { border: 2px solid #b1b1b1a4; padding: .4rem .5rem; border-radius: .2rem; width: 100%; outline: none;}
     label { font-size: .8rem; font-weight: normal; color:rgb(15, 15, 59)}
-    .card { background-color: white; padding: 1.5rem 1.5rem; margin-top: 7rem; border-radius: 1rem; z-index: 10;}
+    .card { width: 83.333333%; background-color: white; padding: 1.5rem 1.5rem; margin-top: 7rem; border-radius: .8rem; z-index: 10; margin-left: auto; margin-right: auto;}
     .attribution { font-size: 11px; text-align: center; }
     .attribution a { color: hsl(228, 45%, 44%); }
+
+    .choice.selected{
+      border-color: rgb(102, 15, 126);
+      background: rgba(250, 209, 250, 0.341);
+    }
+
+    .step-number-container .active {
+      background-color: rgb(166, 221, 245);
+      border: rgb(199, 199, 255);
+      color: navy;
+    }
+
+    /* Slider css */
+      /* The switch - the box around the slider */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 22px;
+      }
+
+      /* Hide default HTML checkbox */
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      /* The slider */
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #140d60;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .2s;
+      }
+
+      input:checked + .slider {
+        background-color: #140d60;
+      }
+
+      input:focus + .slider {
+        box-shadow: 0 0 1px #140d60;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(18px);
+        -ms-transform: translateX(18px);
+        transform: translateX(18px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
+    /* Slider End */
   </style>
 </head>
 <body class="bg-blue-50 h-screen">
   <!-- Sidebar start -->
-  <main class=" flex flex-col h-full">
-    <div class="absolute z-0 w-full">
+  <main class=" flex flex-col items-center h-full">
+    <div class="absolute -z-10 w-full">
       <img class="w-full" src="./assets/images/bg-sidebar-mobile.svg" alt="">
     </div>
-    <div class="hidden">
-      Step 1
-      Your info
-    </div>
 
-    <div class="hidden">
-      Step 2
-      Select plan
+    <!-- Step counter container -->
+    <div class="absolute step-number-container top-11 w-44 justify-between flex">
+      <div class=" z-50">
+        <p id="step-1-number" class="rounded-3xl active font-bold border-white border-2 w-9 h-9 flex items-center justify-center text-center text-white">1</p>
+        <span class="hidden">
+          Step 1
+          Your info
+        </span>
+      </div>
+      <div class="z-50">
+        <p id="step-2-number" class="rounded-3xl font-bold border-white border-2 w-9 h-9 flex items-center justify-center text-center text-white">2</p>
+        <span class="hidden">
+          Step 2
+          Select plan
+        </span>
+      </div>
+      <div class="z-50">
+        <p id="step-3-number" class="rounded-3xl font-bold border-white border-2 w-9 h-9 flex items-center justify-center text-center text-white">3</p>
+        <span class="hidden">
+          Step 3
+          Add-ons
+        </span>
+      </div>
+      <div class="z-50">
+        <p id="step-4-number" class="rounded-3xl font-bold border-white border-2 w-9 h-9 flex items-center justify-center text-center text-white">4</p>
+        <span class="hidden">
+          Step 4  
+          Summary
+        </span>
+      </div>
     </div>
-
-    <div class="hidden">
-      Step 3
-      Add-ons
-    </div>
-
-    <div class="hidden">
-      Step 4  
-      Summary
-    </div>
+    <!-- Step counter container end -->
 
     <!-- Sidebar end -->
 
     <!-- Step 1 start -->
-    <div class="card step-1 w-10/12 mx-auto">
-      <div class="mini-card bg-white px-3 py-4 rounded-xl">
-        <p class="text-3xl font-bold text-blue-950">Personal info</p>
+    <div id="step-1" class="card step-1 w-10/12 mx-auto hidden">
+      <div class="mini-card bg-white px-3 py-4 rounded-lg">
+        <p class="text-2xl text-blue-950" style="font-weight: bolder;">Personal info</p>
         <p class="opacity-40 text-sm font-bold mt-5">Please provide your name, email address, and phone number.</p>
-        <div class="flex flex-col mt-8">
+        <p id="step-1-error" class="text-red-500 text-xs mx-auto mt-4 hidden">Fill in the details.</p>
+        <div class="flex flex-col mt-3">
           <label for="name" class="w-full">Name</label> 
           <input type="text" name="name" id="name" placeholder="e.g. Stephen King">
         </div>
@@ -63,95 +157,275 @@
         </div>
         <div class="mt-5">
           <label for="email">Phone Number</label> 
-          <input type="text" name="phone-number" id="phone-number" placeholder="e.g. +1 234 567 890">
+          <input type="text" name="phone" id="phone" placeholder="e.g. +1 234 567 890">
         </div>
       </div>
     </div>
-    <div class="w-11/12 flex mx-5 justify-between mt-auto mb-3">
-      <button class="border-none outline-none text-gray-400 font-semibold">Go Back</button>
-      <button onclick="nextStep()" class="bg-blue-950 w-36 py-3 text-sm rounded-lg text-white">Next Step</button>
-    </div>
+
  
     <!-- Step 1 end -->
 
     <!-- Step 2 start -->
-    <div class="step-2 card hidden">
-      Select your plan
-      You have the option of monthly or yearly billing.
-  
-      Arcade
-      $9/mo
-  
-      Advanced
-      $12/mo
-  
-      Pro
-      $15/mo
-  
-      Monthly
-      Yearly
-
-      Go Back
-      Next Step
+    <div id="step-2" class="text-blue-950 step-2 card ">
+      <p class="text-2xl font-bold text-blue-950"> Select your plan</p>
+     
+      <p class="font-normal mt-3 text-normal text-gray-500 opacity-60">You have the option of monthly or yearly billing.</p>
+      <p id="step-2-error" class="text-red-500 text-xs mt-3 hidden">Select a plan.</p>
+      <div class="choices-container flex flex-col w-full mt-3">
+        <button id="arcade-btn" onclick="onPlanSelect(this)" class="choice flex w-full px-3 py-2 text-left items-center border-gray-200  duration-100 rounded-lg border-2">
+          <img class="mr-3" src="./assets/images/icon-arcade.svg" alt="">
+          <div>
+            <p class="font-bold text-blue-950 ">Arcade</p>
+            <span class="text-gray-500 opacity-60 ">$9/mo</span>
+            <p class="yearly-free text-blue-950 opacity-100 text-xs w-full mt-1 font-semibold hidden">2 months free</p>
+          </div>
+        </button>
+        <button id="advanced-btn" onclick="onPlanSelect(this)" class="choice flex w-full mt-3 px-3 py-2 text-left items-center border-gray-200 duration-100 rounded-lg border-2">
+          <img class="mr-3" src="./assets/images/icon-advanced.svg" alt="">
+          <div>
+            <p class="font-bold text-blue-950 ">Advanced</p>
+            <span class="text-gray-500 opacity-60 ">$12/mo</span>
+            <p class="yearly-free text-blue-950 opacity-100 text-xs w-full mt-1 font-semibold hidden">2 months free</p>
+          </div>
+        </button>
+        <button id="pro-btn" onclick="onPlanSelect(this)" class="choice flex w-full mt-3 px-3 py-2 text-left items-center border-gray-200 focus:bg-purple-50 focus:border-purple-700 duration-100 rounded-lg border-2">
+          <img class="mr-3" src="./assets/images/icon-pro.svg" alt="">
+          <div>
+            <p class="font-bold text-blue-950 ">Pro</p>
+            <span class="text-gray-500 opacity-60 ">$15/mo</span>
+            <p class="yearly-free text-blue-950 opacity-100 text-xs w-full mt-1 font-semibold hidden">2 months free</p>
+          </div>
+        </button>
+        <!-- Monthly / yearly toggle -->
+        <div class="bg-blue-50 bg-opacity-60 flex flex-wrap mt-3 justify-center items-center w-full px-3 py-3 rounded-lg">
+          <span class="font-bold text-sm" id="monthly-label">Monthly</span>
+          <label class="switch mx-5">
+            <input type="checkbox" id="plan-toggle" onclick="onPlanToggle(this)">
+            <span class="slider round"></span>
+          </label>
+          <span class="text-sm" id="yearly-label">Yearly</span>
+        </div>
+      </div>
     </div>
     <!-- Step 2 end -->
 
     <!-- Step 3 start -->
 
-    <div class="step-3 card hidden">
-      Pick add-ons
-      Add-ons help enhance your gaming experience.
-
-      Online service
-      Access to multiplayer games
-      +$1/mo
-
-      Larger storage
-      Extra 1TB of cloud save
-      +$2/mo
-
-      Customizable Profile
-      Custom theme on your profile
-      +$2/mo
-
-      Next Step
+    <div id="step-3" class="step-3 card hidden">
+      <p class="text-2xl text-blue-950 font-bold">Pick add-ons</p>
+      <p class="text-gray-500 font-bold text-base mt-3 opacity-60">Add-ons help enhance your gaming experience.</p>
+      
+      <div id="add-on-container">
+        <div id="online-service" class="choice flex w-full px-3 py-2 mt-4 text-left items-center border-gray-200  duration-100 rounded-lg border-2">
+          <input id="1" name="online-service" type="checkbox" onclick="onAddOnClick(this)" class="w-4 h-4 border-gray-500 mr-3">
+          <div class="text-left">
+            <p class="text-blue-950 font-bold text-sm">Online service</p>
+            <p class="opacity-30 text-xs">Access to multiplayer games</p>
+          </div>
+          <p class="text-blue-600 font-thin ml-auto text-xs">+$1/mo</p>
+          <p class="text-blue-600 font-thin ml-auto text-xs hidden">+$10/yr</p>
+        </div>
+        <div id="larger-storage" class="choice flex w-full px-3 py-2 mt-4 text-left items-center border-gray-200  duration-100 rounded-lg border-2">
+          <input id="2" name="larger-storage" type="checkbox" onclick="onAddOnClick(this)" class="w-4 h-4 mr-3">
+          <div class="text-left">
+            <p class="text-blue-950 font-bold text-sm">Larger storage</p>
+            <p class="opacity-30 text-xs">Extra 1TB of cloud save</p>
+          </div>
+          <p class="text-blue-600 font-thin ml-auto text-xs">+$2/mo</p>
+          <p class="text-blue-600 font-thin ml-auto text-xs hidden">+$20/yr</p>
+        </div>
+        <div id="customizable-profile" class="choice flex w-full px-3 py-2 mt-4 text-left items-center border-gray-200  duration-100 rounded-lg border-2">
+          <input id="3" name="customizable-profile" type="checkbox" onclick="onAddOnClick(this)" class="w-4 h-4 mr-3">
+          <div class="text-left">
+            <p class="text-blue-950 font-bold text-sm">Customizable Profile</p>
+            <p class="opacity-30 text-xs">Custom theme on your profile</p>
+          </div>
+          <p class="text-blue-600 font-thin ml-auto text-xs">+$2/mo</p>
+          <p class="text-blue-600 font-thin ml-auto text-xs hidden">+$20/yr</p>
+        </div>
+   
+        
+        
+        
+        
+        
+      </div>
     </div>
 
     <!-- Step 3 end -->
 
     <!-- Step 4 start -->
 
-    <div class="step-4 card hidden">
-      Finishing up
-      Double-check everything looks OK before confirming.
+    <div id="step-4" class="step-4 card hidden">
+      <div class="">
+
+      </div>
+      <p class="text-xl font-bold text-blue-950">Finishing up</p>
+      <p class="opacity-40 font-semibold mt-3">Double-check everything looks OK before confirming.</p>
 
       <!-- Dynamically add subscription and add-on selections here -->
-
-        Total (per month/year)
-
-        Go Back
-        Confirm
+      <div class="bg-blue-50 bg-opacity-50 rounded-lg text-sm px-3 py-4 mt-3 divide-y-2">
+        <div class="flex items-center w-full mb-3">
+          <div>
+            <p id="subscription-plan" class="text-blue-950 font-bold text-sm" >Arcade (Monthly)</p>
+            <button class="opacity-40 font-bold underline" onclick="changePlan()">Change</button>
+          </div>
+          <p id="subscription-amount" class="text-blue-950 font-bold ml-auto">$9/mo</p>
+        </div>
+        <div id="add-ons-final" class="py-3">
+          <div class="flex items-center">
+            <p class="opacity-30 font-semibold tracking-tighter">Online service</p>
+            <p class="opacity-100 text-blue-950 font-normal tracking-tighter ml-auto">+$1/mo</p>
+          </div>
+        </div>
+      </div>
+      <div id="total-container" class="flex mt-5 px-3">
+        <span class="text-sm font-bold opacity-30">Total (per month)</span>
+        <p id="total-amount" class="font-bold text-blue-700 ml-auto">+$12/mo</p>
+      </div>
     </div>
   
 
     <!-- Step 4 end -->
 
     <!-- Step 5 start -->
-    <div class="hidden">
-      Thank you!
-  
-      Thanks for confirming your subscription! We hope you have fun 
-      using our platform. If you ever need support, please feel free 
-      to email us at support@loremgaming.com.
+    <div id="step-5" class="card flex flex-col justify-center items-center px-10 py-20 hidden">
+      <img class="w-12 mb-4" src="./assets/images/icon-thank-you.svg" alt="">
+      <p class="text-xl font-bold text-blue-950 mb-4">Thank you!</p>
+      <p class="font-bold text-gray-600 text-sm opacity-60 text-center">Thanks for confirming your subscription! We hope you have fun 
+        using our platform. If you ever need support, please feel free 
+        to email us at support@loremgaming.com.</p>
+      
     </div>
 
     <!-- Step 5 end -->
+
+    <!-- Navigation buttons -->
+
+    <div class="w-11/12 flex mx-5 justify-between mt-auto mb-3">
+      <button onclick="goBack()" id="go-back-btn" class="border-none outline-none text-gray-400 font-semibold hidden">Go Back</button>
+      <button onclick="nextStep()" id="next-step-btn" class="ml-auto bg-blue-950 w-24 py-3 text-sm rounded-lg text-white">Next Step</button>
+      <button onclick="" id="confirm-btn" class="ml-auto bg-blue-950 w-30 py-3 text-sm rounded-lg text-white hidden">Confirm</button>
+    </div>
+
+    <!-- Navigation buttons end -->
 </main>
 <script>
-  let counter = 0;
+  let step = 1;
+  let selectedPlan = {name: null, duration:'monthly', amount: 0};
+  let planDuration = "monthly";
+  let addOnsArray = [];
+  let totalAmount = 0;
+  hideGoBack = () => {
+    if(step == 1){
+      document.getElementById(`go-back-btn`).classList.add('hidden');
+    }else{
+      document.getElementById(`go-back-btn`).classList.remove('hidden');
+    }
+    if(step == 5){
+      document.getElementById(`go-back-btn`).classList.add('hidden');
+    }
+  }
+
+  changeActiveStep = (old, active) => {
+    if(active < 5 && active > 0){
+      document.getElementById(`step-${active}-number`).classList.add('active');
+      document.getElementById(`step-${old}-number`).classList.remove('active');
+      return;
+    }
+  }
+ 
   nextStep = () => {
-    counter += 1;
-    alert(counter);  
+    // Checks if step 1 inputs is filled;
+    if(step == 1){
+      let name = document.getElementById('name').value;
+      let email = document.getElementById('email').value;
+      let phone = document.getElementById('phone').value;
+      if( name == null || name == "" || email == null || email == "" || phone == null || phone == ""){
+        document.getElementById('step-1-error').classList.remove('hidden');
+        // return;
+      }
+      document.getElementById('step-1-error').classList.add('hidden');
+    }
+
+    // checks if step 2 is filled 
+    if(step == 2){
+      if(selectedPlan.name == null || selectedPlan.name == ""){
+        // shows error
+        document.getElementById('step-2-error').classList.remove('hidden');
+        return;
+      }
+    }
+
+    // changes values in step 3 depending on plan duration 
+    if(step == 3){
+      
+    }
+    //
+    // hide next button, show confirm button
+    if(step > 3 ){
+      document.getElementById(`next-step-btn`).classList.add('hidden');
+      document.getElementById(`confirm-btn`).classList.add('hidden');
+    }
+    document.getElementById(`step-${step}`).classList.add('hidden');
+    changeActiveStep(step, step+1);
+    step += 1;
+    document.getElementById(`step-${step}`).classList.remove('hidden');
+    hideGoBack();
+  }
+ 
+  goBack = () => {
+    document.getElementById(`step-${step}`).classList.add('hidden');
+    changeActiveStep(step, step-1);
+    step -= 1;
+    document.getElementById(`step-${step}`).classList.remove('hidden');
+    hideGoBack();
+  }
+  
+  onPlanSelect = (div) => {
+    // removes all select class on all button
+    document.getElementById('arcade-btn').classList.remove('selected');
+    document.getElementById('advanced-btn').classList.remove('selected');
+    document.getElementById('pro-btn').classList.remove('selected');
+    // adds seleted class
+    div.classList.add('selected');
+    // assigns new plan details by price, and amount
+    selectedPlan.name = div.id;
+    // assigns amount based on month
+    selectedPlan.amount = div.id == 'arcade-btn' &&  ? 9
+  }
+
+  onPlanToggle = (checkbox) => {
+    // if yearly else monthly
+    let freeMonthsLabels = document.getElementsByClassName('yearly-free');
+    if(checkbox.checked){
+      Array.prototype.forEach.call(freeMonthsLabels, (freeMonthLabel) => {
+        freeMonthLabel.classList.remove('hidden');
+      })
+      planDuration = 'yearly';
+    }else{
+      Array.prototype.forEach.call(freeMonthsLabels, (freeMonthLabel) => {
+        freeMonthLabel.classList.add('hidden');
+      })
+      planDuration = 'monthly';
+    }
+  }
+
+  onAddOnClick = (addOnCheckbox) => {
+    if(addOnCheckbox.checked){
+      document.getElementById(addOnCheckbox.name).classList.add('selected');
+      addOnsArray.push(addOnCheckbox.id);
+      return;
+    }
+    addOnsArray.splice(addOnsArray.indexOf(addOnCheckbox.id));
+    document.getElementById(addOnCheckbox.name).classList.remove('selected');
+  }
+
+  changePlan = () =>{
+    step = 2;
+    changeActiveStep(4, 2);
+    document.getElementById('step-4').classList.add('hidden');
+    document.getElementById('step-2').classList.remove('hidden');
   }
 </script>
   
